@@ -1,0 +1,63 @@
+<div *ngIf="empTasksList.length > 0; else notasks" class="top-bar">
+  {{empTasksList[0].employeeName}}'s Task
+  List
+</div>
+<ng-template #notasks>
+  <div class="top-bar">There are no tasks!</div>
+</ng-template>
+
+<!-- ---------------------------------- -->
+
+<div class="task-list">
+  <mat-card class="task-card" *ngFor="let task of empTasksList">
+    <div class="task-details">
+      <h2 class="task-name">{{task.title}}</h2>
+      <p class="task-description">{{task.description}}</p>
+
+      <mat-divider></mat-divider>
+
+      <div class="task-info">
+
+        <div class="info-row">
+          <span class="info-label">Due Date:</span>
+          <span class="info-value">{{task.dueDate | date: 'MMM d, y'}}</span>
+        </div>
+
+        <div class="info-row">
+          <span class="info-label">Priority:</span>
+          <span class="info-value">{{task.priority}}</span>
+        </div>
+
+        <div class="info-row">
+          <span class="info-label">Status:</span>
+          <span class="info-value">{{task.taskStatus}}</span>
+        </div>
+      </div>
+
+      <mat-divider></mat-divider>
+
+      <div class="actions">
+        <!-- view task details button -->
+        <button mat-icon-button color="accent" class="view-button" routerLink="/employee/tasks-details/{{task.id}}">
+          <mat-icon style="color: rgb(183, 96, 201);">visibility</mat-icon>
+        </button>
+
+
+        <!-- menu open - button  -->
+        <button mat-icon-button class="update-button" color="primary" [matMenuTriggerFor]="statusMenu">
+          <mat-icon style="color: #2a76cc;">edit</mat-icon>
+        </button>
+
+        <mat-menu #statusMenu="matMenu">
+          <button mat-menu-item (click)="updateStatus(task.id, 'INPROGRESS')">INPROGRESS</button>
+          <button mat-menu-item (click)="updateStatus(task.id, 'COMPLETED')">COMPLETED</button>
+        </mat-menu>
+
+
+      </div>
+
+
+    </div>
+
+  </mat-card>
+</div>

@@ -1,0 +1,66 @@
+<div class="card-container">
+
+  <div class="task-list" *ngIf="currentTask">
+
+    <mat-card class="task-card">
+      <div class="task-details">
+        <h2 class="task-name">{{currentTask.title}}</h2>
+        <p class="task-description">{{currentTask.description}}</p>
+        <mat-divider></mat-divider>
+        <div class="task-info">
+          <div class="info-row">
+            <span class="info-label">Due Date:</span>
+            <span class="info-value">{{currentTask.dueDate | date: 'MMM d, y'}}</span>
+          </div>
+          <div class="info-row">
+            <span class="info-label">Employee:</span>
+            <span class="info-value">{{currentTask.employeeName}}</span>
+          </div>
+          <div class="info-row">
+            <span class="info-label">Priority:</span>
+            <span class="info-value">{{currentTask.priority}}</span>
+          </div>
+          <div class="info-row">
+            <span class="info-label">Status:</span>
+            <span class="info-value">{{currentTask.taskStatus}}</span>
+          </div>
+        </div>
+      </div>
+    </mat-card>
+
+  </div>
+
+  <mat-card class="comment-card">
+    <mat-card-content>
+      <h4>Publish Your Comment</h4>
+      <div>
+        <form [formGroup]="commentForm" (ngSubmit)="publishComment()">
+          <mat-form-field appearance="fill">
+            <mat-label>Content</mat-label>
+            <textarea matInput formControlName="content"></textarea>
+          </mat-form-field>
+          <button mat-raised-button style="float: right;" color="primary" [disabled]="!commentForm.valid">
+            Publish Comment
+          </button>
+        </form>
+      </div>
+    </mat-card-content>
+  </mat-card>
+
+  <!-- to show comments -->
+  <div style="margin-top: 10px;" class="comment-card">
+    <h3>Comments</h3>
+    <mat-card *ngFor="let comment of commentsOfTask" style="margin-top: 10px;">
+      <mat-card-header>
+        <div mat-card-avatar class="example-header-image-admin"></div>
+        <mat-card-title>{{comment.postedBy}}</mat-card-title>
+        <mat-card-subtitle>{{comment.createdAt | date:'medium'}}</mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content>
+        {{comment.content}}
+      </mat-card-content>
+    </mat-card>
+  </div>
+
+
+</div>

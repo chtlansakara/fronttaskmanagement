@@ -1,0 +1,79 @@
+<div class="container">
+  <h2>Create Task</h2>
+
+
+  <form [formGroup]="taskForm" (ngSubmit)="createTask()">
+
+    <!-- title  -->
+    <mat-form-field appearance="outline" class="form-field">
+      <mat-label>Title</mat-label>
+      <input matInput type="text" formControlName="title" placeholder="Title of task" required>
+      <!-- for error message -->
+      <mat-error *ngIf="taskForm.get('title')?.hasError('required')">
+        Title is required!
+      </mat-error>
+    </mat-form-field>
+
+    <!-- description  -->
+    <mat-form-field appearance="outline" class="form-field">
+      <mat-label>Description</mat-label>
+      <!-- text-area input -->
+      <textarea matInput formControlName="description" placeholder="Description"></textarea>
+      <!-- for error message -->
+      <mat-error *ngIf="taskForm.get('description')?.hasError('required')">
+        Description is required!
+      </mat-error>
+    </mat-form-field>
+
+    <!-- choose due date  -->
+    <mat-form-field appearance="outline" class="form-field">
+      <mat-label>Due Date</mat-label>
+      <!-- date type input  -->
+      <input matInput [matDatepicker]="dueDatePicker" formControlName="dueDate" placeholder="Choose a date">
+      <mat-datepicker-toggle matSuffix [for]="dueDatePicker"></mat-datepicker-toggle>
+      <mat-datepicker #dueDatePicker></mat-datepicker>
+      <!-- for error message -->
+      <mat-error *ngIf="taskForm.get('dueDate')?.hasError('required')">
+        Due date is required!
+      </mat-error>
+    </mat-form-field>
+
+    <!-- select priority -->
+    <mat-form-field appearance="outline" class="form-field">
+      <mat-label>Select Priority</mat-label>
+      <!-- select type input -->
+      <mat-select formControlName="priority" name="priority">
+        <mat-option *ngFor="let priority of listOfPriorities" [value]="priority" class="form-field">
+          {{priority}}
+        </mat-option>
+      </mat-select>
+      <!-- for error message -->
+      <mat-error *ngIf="taskForm.get('priority')?.hasError('required') ">
+        Description is required!
+      </mat-error>
+    </mat-form-field>
+
+    <!-- select employee -->
+    <mat-form-field appearance="outline" class="form-field">
+      <mat-label>Select Employee</mat-label>
+      <!-- select type input -->
+      <mat-select formControlName="employeeId" name="employeeId">
+        <mat-option *ngFor="let employee of listOfEmployees" [value]="employee.id">
+          {{employee.name}}
+        </mat-option>
+      </mat-select>
+      <!-- for error message -->
+      <mat-error *ngIf="taskForm.get('employeeId')?.hasError('required') ">
+        Employee is required!
+      </mat-error>
+    </mat-form-field>
+
+
+    <!-- submit button field -->
+    <button type="submit" mat-flat-button [disabled]="taskForm.invalid">
+      Create Task
+    </button>
+
+  </form>
+
+</div>
