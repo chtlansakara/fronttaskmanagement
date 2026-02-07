@@ -15,13 +15,15 @@ import { FormsModule } from '@angular/forms';
 import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { tokenInterceptor } from './interceptor/token.interceptor';
+import { RestrictedComponent } from './common/restricted/restricted.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    SignupComponent
+    SignupComponent,
+    RestrictedComponent,
   ],
   imports: [
     BrowserModule,

@@ -34,9 +34,21 @@ export class DashboardComponent {
 
   //method to get tasks list saved
   getTasks(){
-    this.adminService.getTasks().subscribe(res=>{
-      //saving the result to the class list
-      this.tasksList = res;
+    // this.adminService.getTasks().subscribe(res=>{
+    //   //saving the result to the class list
+    //   this.tasksList = res;
+    // })
+    debugger;
+
+    this.adminService.getTasks().subscribe({
+      next:(response)=>{
+        debugger;
+        //saving the result to the class list
+        this.tasksList = response;
+      },
+      error: (error)=>{
+        debugger;
+      }
     })
   }
 

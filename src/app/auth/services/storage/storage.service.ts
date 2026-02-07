@@ -45,7 +45,15 @@ export class StorageService {
     return user.role;
   }
 
-  //to check if admin logged in 
+  //to check if  logged in
+  static isLoggedIn():boolean{
+    if(this.getToken() == null){
+      return false;
+    }
+    return true;
+  }
+
+  //to check if admin logged in
   static isAdminLoggedIn():boolean{
     if(this.getToken() == null){
       return false;
@@ -55,7 +63,7 @@ export class StorageService {
     return role =="ADMIN";
   }
 
-  //to check if employee logged in 
+  //to check if employee logged in
   static isEmployeeLoggedIn():boolean{
     if(this.getToken() == null){
       return false;
@@ -73,7 +81,7 @@ export class StorageService {
     }
     return user.id;
   }
-  
+
   //to log out
   static logout():void {
     //removing token and user from local storage
