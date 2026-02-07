@@ -11,8 +11,10 @@ import { AngularMaterialModule } from './angular-material.module';
 //Modules for forms
 import { ReactiveFormsModule } from '@angular/forms';
 import { FormsModule } from '@angular/forms';
-//Modules for API calling
-import { HttpClientModule } from '@angular/common/http';
+//Modules for interceptor
+import { provideHttpClient, withInterceptors } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { tokenInterceptor } from './interceptor/token.interceptor';
 
 
 @NgModule({
@@ -28,11 +30,14 @@ import { HttpClientModule } from '@angular/common/http';
     AngularMaterialModule,
     ReactiveFormsModule,
     FormsModule,
-    HttpClientModule 
-   
+    HttpClientModule
+
 
   ],
-  providers: [],
+  providers: [
+    provideHttpClient(withInterceptors([tokenInterceptor])),
+
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
