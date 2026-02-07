@@ -16,6 +16,7 @@ import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { tokenInterceptor } from './interceptor/token.interceptor';
 import { RestrictedComponent } from './common/restricted/restricted.component';
+import { httpErrorInterceptor } from './interceptor/http-error.interceptor';
 
 
 @NgModule({
@@ -37,7 +38,7 @@ import { RestrictedComponent } from './common/restricted/restricted.component';
 
   ],
   providers: [
-    provideHttpClient(withInterceptors([tokenInterceptor])),
+    provideHttpClient(withInterceptors([tokenInterceptor, httpErrorInterceptor])),
 
   ],
   bootstrap: [AppComponent]

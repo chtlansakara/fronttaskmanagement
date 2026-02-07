@@ -26,3 +26,27 @@ body
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
 }
+
+.snackbar-error
+{
+  // --mdc-snackbar-container-color: #ef1d12;
+  @include mat.snack-bar-overrides((button-color: white,
+      container-color: #ef1d12,
+    ));
+}
+
+.snackbar-success
+{
+  // --mdc-snackbar-container-color: #ef1d12;
+  @include mat.snack-bar-overrides((button-color: white,
+      container-color: #14581f,
+    ));
+}
+
+.snackbar-info
+{
+  // --mdc-snackbar-container-color: #ef1d12;
+  @include mat.snack-bar-overrides((button-color: white,
+      container-color: #142c58,
+    ));
+}

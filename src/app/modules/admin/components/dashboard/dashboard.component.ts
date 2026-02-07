@@ -38,16 +38,16 @@ export class DashboardComponent {
     //   //saving the result to the class list
     //   this.tasksList = res;
     // })
-    debugger;
 
     this.adminService.getTasks().subscribe({
       next:(response)=>{
-        debugger;
         //saving the result to the class list
         this.tasksList = response;
       },
       error: (error)=>{
-        debugger;
+        // this.snackbar.open("Server error.","Close",{duration:5000, panelClass:['snackbar-error']});
+        // console.log(`${error.name} of status ${error.status} occurred`);
+        // console.log(error.message);
       }
     })
   }
@@ -55,7 +55,7 @@ export class DashboardComponent {
   //method to delete a task
   deleteTask(id: number){
     this.adminService.deleteTask(id).subscribe(res=>{
-    this.snackbar.open("Task deleted successfully.","Close",{duration:5000});
+    this.snackbar.open("Task deleted successfully.","Close",{duration:5000, panelClass:['snackbar-success']});
     //reload the task list by calling that API method
     this.getTasks();
     })
